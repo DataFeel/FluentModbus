@@ -98,6 +98,16 @@ namespace FluentModbus
             Initialize(serialPort, isInternal: true, endianness);
         }
 
+        public void Connect(IModbusRtuSerialPort serial)
+        {
+            Connect(serial, ModbusEndianness.LittleEndian);
+        }
+
+        public void Connect(IModbusRtuSerialPort serial, ModbusEndianness endianness)
+        {
+            Initialize(serial, isInternal: false, endianness);
+        }
+
         /// <summary>
         /// Initialize the Modbus TCP client with an externally managed <see cref="IModbusRtuSerialPort"/>.
         /// </summary>
