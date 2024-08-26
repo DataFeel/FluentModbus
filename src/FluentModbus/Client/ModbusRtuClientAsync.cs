@@ -1,7 +1,7 @@
 ﻿
  /* This is automatically translated code. */
 
-namespace FluentModbus
+ namespace FluentModbus
 {
 	public partial class ModbusRtuClient
 	{
@@ -19,7 +19,7 @@ namespace FluentModbus
                 throw new ModbusException(ErrorMessage.ModbusClient_InvalidUnitIdentifier);
 
             // special case: broadcast (only for write commands)
-            if (unitIdentifier == 0)
+            if (unitIdentifier == 0 || unitIdentifier > 100)
             {
                 switch (functionCode)
                 {
@@ -45,11 +45,12 @@ namespace FluentModbus
             _frameBuffer.Writer.Write(crc);
             frameLength = (int)_frameBuffer.Writer.BaseStream.Position;
 
+
             // send request
             await _serialPort!.Value.Value.WriteAsync(_frameBuffer.Buffer, 0, frameLength, cancellationToken).ConfigureAwait(false);
 
             // special case: broadcast (only for write commands)
-            if (unitIdentifier == 0)
+            if (unitIdentifier == 0 || unitIdentifier > 100)
                 return _frameBuffer.Buffer.AsMemory(0, 0);
 
             // wait for and process response
