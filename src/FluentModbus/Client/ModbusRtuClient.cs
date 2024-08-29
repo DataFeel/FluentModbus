@@ -82,7 +82,8 @@ namespace FluentModbus
 
             _frameBuffer = new ModbusFrameBuffer(256);
 
-            _serialPort.Close();
+            //_serialPort.Close();
+            //_serialPort.Open();
 
             if (!_serialPort.IsOpen)
             {
