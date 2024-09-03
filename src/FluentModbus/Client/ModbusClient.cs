@@ -14,8 +14,10 @@ namespace FluentModbus
         /// Gets the connection status of the underlying client.
         /// </summary>
         public abstract bool IsConnected { get; }
-        
         protected private bool SwapBytes { get; set; }
+
+        //public TimeSpan DefaultReadTimeout { get; set; } = TimeSpan.FromMilliseconds(500);
+        //public TimeSpan DefaultWriteTimeout { get; set; } = TimeSpan.FromMilliseconds(500);
 
         #endregion
 

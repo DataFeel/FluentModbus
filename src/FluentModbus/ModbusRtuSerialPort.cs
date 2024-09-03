@@ -154,7 +154,7 @@ namespace FluentModbus
                 {
                     throw new TimeoutException("The asynchronous write operation timed out.");
                 }
-                catch (IOException) when (timeoutCts.IsCancellationRequested && !token.IsCancellationRequested)
+                catch (IOException) when (timeoutCts.IsCancellationRequested && !token.IsCancellationRequested) // This should be an ObjectDisposedException or an InvalidOperationException
                 {
                     throw new TimeoutException("The asynchronous write operation timed out.");
                 }

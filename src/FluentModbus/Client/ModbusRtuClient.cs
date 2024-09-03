@@ -13,7 +13,7 @@ namespace FluentModbus
         private IModbusRtuSerialPort _serialPort = default!;
         private ModbusFrameBuffer _frameBuffer = default!;
 
-        public SerialPort SystemPort { get; private set; }
+        //public SerialPort SystemPort { get; private set; }
 
 
         #endregion
@@ -43,11 +43,11 @@ namespace FluentModbus
                 ReadTimeout = serialParams.ReadTimeout,
                 WriteTimeout = serialParams.WriteTimeout
             };
-            SystemPort = systemPort;
+            //SystemPort = systemPort;
 
-            systemPort.Open();
-            systemPort.BaseStream.Flush();
-            systemPort.Close();
+            //systemPort.Open();
+            //systemPort.BaseStream.Flush();
+            //systemPort.Close();
 
             _serialPort = new ModbusRtuSerialPort(systemPort);
         }
@@ -96,6 +96,11 @@ namespace FluentModbus
             //}
 
             //var dump = _serialPort.ToString();
+        }
+
+        public async Task ConnectAsync(ModbusEndianness endianness = ModbusEndianness.BigEndian)
+        {
+            await Task.Run(() => Connect(endianness));
         }
 
 
